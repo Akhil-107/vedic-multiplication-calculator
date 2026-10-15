@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vedic Multiplication Calculator | IKS 3001CSIKS</title>
+
+<style>
+:root {
+  --navy: #14213d;
+  --saffron: #fca311;
+  --cream: #fffaf0;
+  --ink: #202938;
+  --muted: #64748b;
+  --green: #176b50;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: linear-gradient(135deg, #fff7e6, #eef4ff);
+  color: var(--ink);
+}
+
+header {
+  background: var(--navy);
+  color: white;
+  padding: 28px 18px;
+  text-align: center;
+  border-bottom: 5px solid var(--saffron);
+}
+
+header h1 {
+  margin: 12px 0 8px;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+}
+
+header p {
+  margin: 0;
+  color: #e2e8f0;
+}
+
+main {
+  max-width: 980px;
+  margin: 28px auto;
+  padding: 0 16px 36px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 10px 30px #14213d12;
+  margin-bottom: 18px;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+label {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 7px;
+}
+
+input {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 1.05rem;
+}
+
+button {
+  margin-top: 16px;
+  background: var(--saffron);
+  border: 0;
+  border-radius: 10px;
+  padding: 13px 20px;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #172033;
+}
+
+button:hover {
+  filter: brightness(.96);
+}
+
+.result {
+  display: none;
+}
+
+.answer {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 850;
+  color: var(--green);
+  overflow-wrap: anywhere;
+}
+
+.small {
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.method {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 12px;
+  overflow-wrap: anywhere;
+}
+
+.method h3 {
+  margin: 0 0 8px;
+}
+
+.steps {
+  padding-left: 22px;
+  line-height: 1.7;
+}
+
+.tag {
+  display: inline-block;
+  background: #fff0cc;
+  color: #754900;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 800;
+}
+
+.foot {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+code {
+  background: #eef2ff;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+/* Student submission details */
+.submission {
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff, #fffaf0);
+  border: 2px solid var(--navy);
+  border-top: 5px solid var(--saffron);
+  border-radius: 18px;
+  padding: 24px 18px;
+  margin-top: 28px;
+  box-shadow: 0 10px 30px #14213d12;
+}
+
+.submission h2 {
+  color: var(--navy);
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.submission p {
+  font-size: 1.05rem;
+  line-height: 2;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.submission strong {
+  color: var(--navy);
+  font-weight: 800;
+}
+
+@media (max-width: 620px) {
+  .inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 17px;
+  }
+
+  .submission {
+    padding: 20px 12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <span class="tag">INDIAN KNOWLEDGE SYSTEM · 3001CSIKS</span>
+
+  <h1>Vedic Mathematics-Based Fast Multiplication Calculator</h1>
+
+  <p>
+    Demonstration of Urdhva Tiryagbhyam —
+    “Vertically and Crosswise”
+  </p>
+</header>
+
+<main>
+
+  <section class="panel">
+    <h2>Multiply Two Whole Numbers</h2>
+
+    <p class="small">
+      Enter non-negative whole numbers up to 15 digits.
+      This educational demonstration shows the digit-wise
+      vertical-and-crosswise calculation and checks it against
+      ordinary multiplication.
+    </p>
+
+    <div class="inputs">
+      <div>
+        <label for="a">First Number</label>
+        <input
+          id="a"
+          inputmode="numeric"
+          value="1234"
+          maxlength="15"
+          autocomplete="off"
+          aria-describedby="error"
+        >
+      </div>
+
+      <div>
+        <label for="b">Second Number</label>
+        <input
+          id="b"
+          inputmode="numeric"
+          value="5678"
+          maxlength="15"
+          autocomplete="off"
+          aria-describedby="error"
+        >
+      </div>
+    </div>
+
+    <button id="calc" type="button">Calculate Product</button>
+
+    <p id="error" role="alert"
+       style="color:#b91c1c;font-weight:700"></p>
+  </section>
+
+  <section class="panel result" id="result" aria-live="polite">
+    <h2>Result</h2>
+
+    <div class="answer" id="answer"></div>
+
+    <p id="check" class="small"></p>
+
+    <div class="method">
+      <h3>Urdhva Tiryagbhyam Steps</h3>
+      <ol class="steps" id="steps"></ol>
+    </div>
+
+    <div class="method">
+      <h3>Conventional Multiplication Check</h3>
+      <p id="conventional"></p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>How the Method Works</h2>
+
+    <ol class="steps">
+      <li>
+        Start with the rightmost digits and multiply vertically.
+      </li>
+      <li>
+        Move through crosswise digit products, adding the products
+        for each diagonal.
+      </li>
+      <li>
+        Keep the units digit of each sum and carry the remaining
+        value to the next diagonal.
+      </li>
+      <li>
+        Continue until all diagonals and the final carry are processed.
+      </li>
+      <li>
+        Compare the final answer with the standard product to
+        verify correctness.
+      </li>
+    </ol>
+
+    <p class="foot">
+      <strong>Important:</strong>
+      This is a teaching implementation of a vertical-and-crosswise
+      multiplication pattern. It does not claim that the algorithm
+      is always faster than built-in multiplication. Modern language
+      runtimes and processors optimize arithmetic heavily.
+    </p>
+  </section>
+
+  <!-- Student details at the bottom of the page -->
+  <footer class="submission">
+    <h2>Project Submission Details</h2>
+
+    <p>
+      <strong>Submitted By:</strong> Akhil Verma<br>
+
+      <strong>Roll No:</strong> 202510101310011<br>
+
+      <strong>Submitted To:</strong> Mr. Ved Prakash<br>
+
+      <strong>Course:</strong> Indian Knowledge System (3001CSIKS)
+    </p>
+  </footer>
+
+</main>
+
+<script>
+function validate(s) {
+  return /^(0|[1-9]\d{0,14})$/.test(s.trim());
+}
+
+function vedicMultiply(aText, bText) {
+  const a = [...aText].reverse().map(Number);
+  const b = [...bText].reverse().map(Number);
+
+  const raw = [];
+
+  // Calculate the digit products for each diagonal.
+  for (let k = 0; k < a.length + b.length - 1; k++) {
+    let sum = 0;
+    const terms = [];
+
+    for (let i = 0; i < a.length; i++) {
+      const j = k - i;
+
+      if (j >= 0 && j < b.length) {
+        sum += a[i] * b[j];
+        terms.push(`${a[i]} × ${b[j]}`);
+      }
+    }
+
+    raw.push({ sum, terms });
+  }
+
+  let carry = 0;
+  const digits = [];
+  const lines = [];
+
+  // Process each diagonal, including its carry.
+  for (let k = 0; k < raw.length; k++) {
+    const total = raw[k].sum + carry;
+
+    digits.push(total % 10);
+
+    lines.push(
+      `Diagonal ${k + 1} (from the right): ` +
+      `${raw[k].terms.join(" + ")} = ${raw[k].sum}; ` +
+      `add carry ${carry} → ${total}. ` +
+      `Write ${total % 10}, carry ${Math.floor(total / 10)}.`
+    );
+
+    carry = Math.floor(total / 10);
+  }
+
+  // Process any remaining carry.
+  while (carry > 0) {
+    digits.push(carry % 10);
+
+    lines.push(
+      `Final carry: write ${carry % 10}, ` +
+      `remaining carry ${Math.floor(carry / 10)}.`
+    );
+
+    carry = Math.floor(carry / 10);
+  }
+
+  // Remove unnecessary leading zeroes.
+  while (
+    digits.length > 1 &&
+    digits[digits.length - 1] === 0
+  ) {
+    digits.pop();
+  }
+
+  return {
+    product: digits.reverse().join(""),
+    lines
+  };
+}
+
+document.getElementById("calc").addEventListener("click", () => {
+  const a = document.getElementById("a").value.trim();
+  const b = document.getElementById("b").value.trim();
+  const err = document.getElementById("error");
+  const result = document.getElementById("result");
+
+  err.textContent = "";
+
+  if (!validate(a) || !validate(b)) {
+    err.textContent =
+      "Please enter only non-negative whole numbers " +
+      "from 0 to 15 digits, without commas or decimals.";
+
+    result.style.display = "none";
+    return;
+  }
+
+  const v = vedicMultiply(a, b);
+  const standard = (BigInt(a) * BigInt(b)).toString();
+
+  document.getElementById("answer").textContent =
+    `${a} × ${b} = ${v.product}`;
+
+  document.getElementById("check").textContent =
+    v.product === standard
+      ? "Verification passed: the Vedic-method result matches standard multiplication."
+      : "Verification failed; please report this issue.";
+
+  document.getElementById("conventional").textContent =
+    `${a} × ${b} = ${standard} (calculated using JavaScript BigInt multiplication).`;
+
+  const ol = document.getElementById("steps");
+  ol.replaceChildren();
+
+  v.lines.forEach(line => {
+    const li = document.createElement("li");
+    li.textContent = line;
+    ol.appendChild(li);
+  });
+
+  result.style.display = "block";
+});
+
+// Display the default calculation when the page opens.
+document.getElementById("calc").click();
+</script>
+
+</body>
+</html>
